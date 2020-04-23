@@ -1,0 +1,5 @@
+/imizunavi-plus-web/public/*.js
+/imizunavi-plus-web/public/*.json
+/imizunavi-plus-web/public/css
+/imizunavi-plus-web/public/js
+.laradock/
