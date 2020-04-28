@@ -55,9 +55,34 @@ class PostController extends Controller
      */
     public function show(Post $post)//イングリッシュドバインディング　こうしておくとwhereを使うことなくそのidのデータを取ってこれる
     {
+        if (!function_exists('is_countable')) {
+            function is_countable($var) {
+                if(is_array($var) || $var instanceof Countable){
+                    count($var);
+                }else{
+                    return 0;
+                }
+            }
+        }
+
+        $userAuth = \Auth::user();
+
+        $post->load('likes');
+        $defaultCount = count($post->likes);
+
+        $defaultLiked = $post->likes->where('user_id',$userAuth->id)->first();    
+        if(!is_array($defaultLiked)){
+            $defaultLiked = false;
+        } else {
+            $defaultLiked = true;
+        }
         return view('posts.show',[
-            'post' =>$post
+            'post' => $post,
+            'userAuth' => $userAuth,
+            'defaultLiked' => $defaultLiked,
+            'defaultCount' => $defaultCount
         ]);
+
     }
 
     /**

@@ -16,7 +16,14 @@
                     @endif
 
                     {{$post->content}}
+                    <like
+                        :post-id="{{json_encode($post->id)}}"
+                        :user-id="{{json_encode($userAuth->id)}}"
+                        :default-liked="{{json_encode($defaultLiked)}}"
+                        :default-count="{{json_encode($defaultCount)}}"
+                    ></like>
                 </div>
+
             </div>
         </div>
     </div>

@@ -9,4 +9,10 @@ class Post extends Model
     protected $fillable = [
         'id','user_id','content' 
     ];
+    
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+
+    }
 }
